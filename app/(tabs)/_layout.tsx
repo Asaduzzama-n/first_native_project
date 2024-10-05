@@ -1,37 +1,54 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import { StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { Tabs } from "expo-router";
+import Iconicons from "@expo/vector-icons/Ionicons";
 
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+const TabLayout = () => {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-      }}>
+        tabBarActiveTintColor: "#ffd33d",
+        headerStyle: { backgroundColor: "#25292e" },
+        headerShadowVisible: false,
+        headerTintColor: "#ffff",
+        tabBarStyle: {
+          backgroundColor: "#25292e",
+          borderTopColor: "#25292e",
+        },
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
+          title: "Home",
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
+            <Iconicons
+              name={focused ? "home-sharp" : "home-outline"}
+              size={24}
+              color={color}
+            />
           ),
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="about"
         options={{
-          title: 'Explore',
+          title: "About",
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
+            <Iconicons
+              name={
+                focused ? "information-circle" : "information-circle-outline"
+              }
+              size={24}
+              color={color}
+            ></Iconicons>
           ),
         }}
       />
     </Tabs>
   );
-}
+};
+
+export default TabLayout;
+
+const styles = StyleSheet.create({});
