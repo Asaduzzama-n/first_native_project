@@ -1,28 +1,27 @@
-import { StyleSheet, Text, View } from "react-native";
-import React, { useEffect } from "react";
-import { Stack } from "expo-router";
-import { setStatusBarStyle, StatusBar } from "expo-status-bar";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-const RootLayout = () => {
+import { SplashScreen, Stack } from "expo-router";
+import "./global.css";
+
+import { useFonts } from "expo-font";
+import { useEffect } from "react";
+
+export default function RootLayout() {
+  const [fontsLoaded] = useFonts({
+    Rubik: require("../assets/fonts/Rubik-Regular.ttf"),
+    RubikBold: require("../assets/fonts/Rubik-Bold.ttf"),
+    RubikMedium: require("../assets/fonts/Rubik-Medium.ttf"),
+    RubikSemiBold: require("../assets/fonts/Rubik-SemiBold.ttf"),
+    RubikLight: require("../assets/fonts/Rubik-Light.ttf"),
+  });
+
   useEffect(() => {
-    setTimeout(() => {
-      setStatusBarStyle("light");
-    }, 0);
-  }, []);
+    if (fontsLoaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
 
-  return (
-    <>
-      <GestureHandlerRootView>
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="+not-found" />
-        </Stack>
-      </GestureHandlerRootView>
-      <StatusBar style="light" />
-    </>
-  );
-};
+  if (!fontsLoaded) {
+    return null;
+  }
 
-export default RootLayout;
-
-const styles = StyleSheet.create({});
+  return <Stack screenOptions={{ headerShown: false }}></Stack>;
+}
