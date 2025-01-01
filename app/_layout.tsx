@@ -3,6 +3,7 @@ import "./global.css";
 
 import { useFonts } from "expo-font";
 import { useEffect } from "react";
+import { AppContextProvider } from "@/lib/useContext";
 
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
@@ -23,5 +24,9 @@ export default function RootLayout() {
     return null;
   }
 
-  return <Stack screenOptions={{ headerShown: false }}></Stack>;
+  return (
+    <AppContextProvider>
+      <Stack screenOptions={{ headerShown: false }}></Stack>
+    </AppContextProvider>
+  );
 }

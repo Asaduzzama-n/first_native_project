@@ -10,12 +10,18 @@ import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import images from "@/constants/images";
 import icons from "@/constants/icons";
-
-import { Link, Redirect } from "expo-router";
+import { Redirect } from "expo-router";
+import { useAppContext } from "@/lib/useContext";
+import { login } from "@/lib/userManageMent";
 
 const SignIn = () => {
+  const { user, setUser } = useAppContext();
+  if (user) {
+    return <Redirect href={"/"} />;
+  }
   const handleLogin = () => {
-    Alert.alert("Login", "Login with Google");
+    const user = login();
+    setUser(user);
   };
   return (
     <SafeAreaView className="bg-white h-full">
