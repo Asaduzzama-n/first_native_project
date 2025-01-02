@@ -8,7 +8,7 @@ const RootLayout = () => {
 
   if (loading)
     return (
-      <SafeAreaView className="flex justify-center items-center h-full">
+      <SafeAreaView className="flex justify-center items-center h-full ">
         <ActivityIndicator size="large" className="text" />
       </SafeAreaView>
     );

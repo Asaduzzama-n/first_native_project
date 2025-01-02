@@ -29,7 +29,7 @@ const SettingItem = ({
   return (
     <TouchableOpacity
       onPress={onPress}
-      className="flex flex-row items-center justify-between py-4 border-b border-gray-100 py-3"
+      className="flex flex-row items-center justify-between py-4 border-b border-gray-100 "
     >
       <View className="flex flex-row items-center gap-3">
         <Image source={icon} className="size-5"></Image>
@@ -46,14 +46,15 @@ const SettingItem = ({
 };
 
 const Profile = () => {
-  const { user } = useAppContext();
+  const { user, setUser } = useAppContext();
 
   const handleLogout = () => {
     // Logout the user
+    setUser(null);
   };
 
   return (
-    <SafeAreaView className="h-full bg-white">
+    <SafeAreaView className="h-full bg-white p-5">
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 32, paddingHorizontal: 7 }}
@@ -68,7 +69,7 @@ const Profile = () => {
               source={images.avatar}
               className="size-44  relative rounded-full"
             ></Image>
-            <TouchableOpacity className="absolute right-2 bottom-11 ">
+            <TouchableOpacity className="absolute right-2 bottom-9 ">
               <Image source={icons.edit} className="size-9"></Image>
             </TouchableOpacity>
             <Text className="text-2xl font-bold">{user?.name}</Text>
